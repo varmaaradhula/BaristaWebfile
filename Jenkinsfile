@@ -3,7 +3,7 @@ pipeline {
     environment {
         SSH_USER = 'ubuntu' // Replace with your instance's username
         SSH_HOST = '18.133.120.114' // Replace with the AWS instance's public IP
-        #SSH_KEY = 'instancekey.pem' // Path to the private SSH key in Jenkins
+        //SSH_KEY = 'instancekey.pem' // Path to the private SSH key in Jenkins
         REMOTE_DIR = '/var/www/html/' // Apache's default web directory
     }
     stages {
