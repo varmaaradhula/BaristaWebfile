@@ -3,14 +3,14 @@ pipeline {
     environment {
         SSH_USER = 'ubuntu' // Replace with your instance's username
         SSH_HOST = '18.133.120.114' // Replace with the AWS instance's public IP
-        SSH_KEY = 'instancekey.pem' // Path to the private SSH key in Jenkins
+        #SSH_KEY = 'instancekey.pem' // Path to the private SSH key in Jenkins
         REMOTE_DIR = '/var/www/html/' // Apache's default web directory
     }
     stages {
         stage('Fetch web code fron Git'){
 
             steps{
-                echo 'Cloning terraform scripts repo'
+                echo 'Cloning webfiles repo'
                 git branch: 'master', url: 'https://github.com/varmaaradhula/BaristaWebfile.git'
             }
         }
@@ -19,7 +19,7 @@ pipeline {
                 script {
                     echo 'Installing HTTPD on AWS instance...'
                     sh """
-                    ssh -o StrictHostKeyChecking=no -i ${SSH_KEY} ${SSH_USER}@${SSH_HOST} \
+                    ssh -o StrictHostKeyChecking=no -i ./instancekey.pem ${SSH_USER}@${SSH_HOST} \
                     "sudo yum install -y httpd && sudo systemctl start httpd && sudo systemctl enable httpd"
                     """
                 }
