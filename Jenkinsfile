@@ -21,9 +21,8 @@ pipeline {
             steps{
                 echo 'Changing mode of the file'
                 sh """
-                cd BaristaWebfile
                 sudo chmod 400 instancekey
-                
+
                 """
             }
         }
