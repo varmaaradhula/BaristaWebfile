@@ -21,7 +21,7 @@ pipeline {
             steps{
                 echo 'Changing mode of the file'
                 sh """
-                sudo chmod 400 instancekey
+                chmod 400 instancekey
 
                 """
             }
