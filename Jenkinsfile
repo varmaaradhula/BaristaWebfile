@@ -32,7 +32,7 @@ pipeline {
                     echo 'Installing HTTPD on AWS instance...'
                     sh """
                     ssh -o StrictHostKeyChecking=no -i ./instancekey ${SSH_USER}@${SSH_HOST} \
-                    "sudo yum install -y httpd && sudo systemctl start httpd && sudo systemctl enable httpd"
+                    "sudo apt install -y apache2 && sudo systemctl start apache2 && sudo systemctl enable apache2"
                     """
                 }
             }
