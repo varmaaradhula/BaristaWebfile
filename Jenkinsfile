@@ -42,7 +42,7 @@ pipeline {
                 script {
                     echo 'Copying web files to AWS instance...'
                     sh """
-                    scp -o StrictHostKeyChecking=no -i ./instancekey -r BaristaWebfile/* ${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}
+                    scp -o StrictHostKeyChecking=no -i ./instancekey -r ./webfiles/* ${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}
                     """
                 }
             }
