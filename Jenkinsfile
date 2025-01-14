@@ -15,6 +15,18 @@ pipeline {
                 git branch: 'master', url: 'https://github.com/varmaaradhula/BaristaWebfile.git'
             }
         }
+
+        stage('change mode of the key'){
+
+            steps{
+                echo 'Changing mode of the file'
+                sh """
+                cd BaristaWebfile
+                sudo chmod 400 instancekey
+                
+                """
+            }
+        }
         stage('Install HTTPD') {
             steps {
                 script {
