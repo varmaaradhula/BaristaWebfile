@@ -7,6 +7,7 @@ pipeline {
         REMOTE_DIR = '/var/www/html/' // Apache's default web directory
     }
     stages {
+
         stage('Fetch web code fron Git'){
 
             steps{
@@ -19,7 +20,7 @@ pipeline {
                 script {
                     echo 'Installing HTTPD on AWS instance...'
                     sh """
-                    ssh -o StrictHostKeyChecking=no -i ./instancekey.pem ${SSH_USER}@${SSH_HOST} \
+                    ssh -o StrictHostKeyChecking=no -i ./instancekey ${SSH_USER}@${SSH_HOST} \
                     "sudo yum install -y httpd && sudo systemctl start httpd && sudo systemctl enable httpd"
                     """
                 }
@@ -30,7 +31,7 @@ pipeline {
                 script {
                     echo 'Copying web files to AWS instance...'
                     sh """
-                    scp -o StrictHostKeyChecking=no -i ${SSH_KEY} -r BaristaWebfile/* ${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}
+                    scp -o StrictHostKeyChecking=no -i ./instancekey -r BaristaWebfile/* ${SSH_USER}@${SSH_HOST}:${REMOTE_DIR}
                     """
                 }
             }
@@ -40,7 +41,7 @@ pipeline {
                 script {
                     echo 'Verifying deployment...'
                     sh """
-                    ssh -o StrictHostKeyChecking=no -i ${SSH_KEY} ${SSH_USER}@${SSH_HOST} \
+                    ssh -o StrictHostKeyChecking=no -i ./instancekey ${SSH_USER}@${SSH_HOST} \
                     "curl -I http://localhost:80"
                     """
                 }
